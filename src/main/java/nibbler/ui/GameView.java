@@ -1307,8 +1307,7 @@ public class GameView {
             final int number = ++soundCounter;
             new Thread(() -> {
                 try {
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(GameView.class.getResource(
-                            "/resources/" + sound));
+                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource("/" + sound));
                     Clip clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     clips.put(number, clip);
@@ -1428,19 +1427,20 @@ public class GameView {
         void setWindowIcon(String windowIcon) {
             Image fensterSymbol = null;
             try {
-                fensterSymbol = new ImageIcon(GameView.class.getResource("/resources/" + windowIcon)).getImage();
+                fensterSymbol = new ImageIcon(getClass().getResource("/" + windowIcon)).getImage();
+                frame.setIconImage(fensterSymbol);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.err.println("Symbolfile \"" + windowIcon + "\" konnte nicht gefunden werden!");
             }
-            frame.setIconImage(fensterSymbol);
+           
         }
 
         // Maus Cursor
         void setMouseCursor(String cursor, boolean centered) {
             Image im = null;
             try {
-                im = new ImageIcon(GameView.class.getResource("/resources/" + cursor)).getImage();
+                im = new ImageIcon(getClass().getResource( cursor)).getImage();
             } catch (Exception e) {
                 System.out.println("Cursorfile konnte nicht gefunden werden!");
                 System.exit(1);
